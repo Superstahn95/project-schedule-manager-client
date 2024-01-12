@@ -7,6 +7,7 @@ function ProjectCard({ project }) {
     if (project.status === "Completed") return "text-green-500";
     return "text-black";
   };
+  console.log(project);
   return (
     <div className="border border-gray-700 rounded-md shadow-lg p-4 dark:text-white font-montserrat">
       <div className="flex items-center justify-between">
