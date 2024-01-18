@@ -13,6 +13,14 @@ const ADD_PROJECT = gql`
   }
 `;
 
+// const DELETE_PROJECT = gql`
+// mutation DeleteProject($clientId: ID!){
+//     deleteProject(clientId: $clientId){
+
+//     }
+// }
+// `;
+
 const projectMutations = { ADD_PROJECT };
 
 export default projectMutations;

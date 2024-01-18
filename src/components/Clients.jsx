@@ -5,9 +5,17 @@ import { FaTrash } from "react-icons/fa";
 import Container from "./Container";
 import AddClientModal from "./AddClientModal";
 import clientQueries from "../queries/clientQueries";
+import projectQueries from "../queries/projectQueries";
+import clientMutations from "../mutations/clientMutations";
 
 function Clients() {
   const { loading, error, data } = useQuery(clientQueries.GET_CLIENTS);
+  const [deleteClient] = useMutation(clientMutations.DELETE_CLIENT, {
+    refetchQueries: [
+      { query: clientQueries.GET_CLIENTS },
+      { query: projectQueries.GET_PROJECTS },
+    ],
+  });
   const columns = [
     { name: "Name", selector: (row) => row.name },
     { name: "Email", selector: (row) => row.email },
@@ -17,7 +25,7 @@ function Clients() {
       name: "Action",
       cell: (row) => (
         <button
-          onClick={() => deleteClient({ variables: { id: row.id } })}
+          onClick={() => deleteClient({ variables: { clientId: row.id } })}
           className="bg-red-500 p-1 rounded-md"
         >
           <FaTrash color={"white"} />

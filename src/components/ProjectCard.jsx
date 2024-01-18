@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import CountdownTimer from "./CountdownTimer";
 
 function ProjectCard({ project }) {
   const getStatusColor = () => {
@@ -22,6 +23,7 @@ function ProjectCard({ project }) {
       <div>
         <span className={`text-sm ${getStatusColor()}`}>{project?.status}</span>
       </div>
+      <CountdownTimer countDownEndTime={project.countDownEndTime} />
     </div>
   );
 }

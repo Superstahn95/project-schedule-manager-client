@@ -11,6 +11,12 @@ const CREATE_CLIENT = gql`
     }
   }
 `;
-const clientMutations = { CREATE_CLIENT };
+
+const DELETE_CLIENT = gql`
+  mutation DeleteClient($clientId: ID!) {
+    deleteClient(clientId: $clientId)
+  }
+`;
+const clientMutations = { CREATE_CLIENT, DELETE_CLIENT };
 
 export default clientMutations;

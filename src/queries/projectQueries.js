@@ -7,6 +7,8 @@ const GET_PROJECTS = gql`
       name
       description
       createdAt
+      status
+      countDownEndTime
     }
   }
 `;
@@ -18,6 +20,7 @@ const GET_PROJECT = gql`
       description
       createdAt
       countDownEndTime
+      status
       clientId {
         name
         email
