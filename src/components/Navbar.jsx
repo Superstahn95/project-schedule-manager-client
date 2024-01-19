@@ -2,6 +2,7 @@ import { useTheme } from "../context/ThemeContext";
 import { IoSunnySharp } from "react-icons/io5";
 import { FaMoon } from "react-icons/fa";
 import Container from "./Container";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const { theme, setTheme } = useTheme();
@@ -10,7 +11,7 @@ function Navbar() {
     <div className="bg-slate-200 text-black dark:text-white h-[50px] font-montserrat  dark:bg-slate-900 border-b border-slate-200">
       <Container>
         <div className="flex justify-between items-center">
-          <p>ProjectMgt</p>
+          <Link to={"/"}>ProjectScheduleMgt</Link>
           <div>
             {theme === "dark" ? (
               <button className="p-1" onClick={() => setTheme("light")}>
