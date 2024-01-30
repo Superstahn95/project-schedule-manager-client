@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { FaUser } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
@@ -22,9 +22,12 @@ function Project() {
     <Container>
       <div className="flex justify-center font-montserrat dark:text-white">
         <div className="border border-gray-500 mt-7 p-7 rounded-md w-[100%] md:w-[500px] lg:w-[700px] dark:border-gray-300 flex flex-col">
-          <button className="self-end py-1 px-2 rounded-md bg-gray-200 dark:text-black">
+          <Link
+            to={"/"}
+            className="self-end py-1 px-2 rounded-md bg-gray-200 dark:text-black"
+          >
             Back
-          </button>
+          </Link>
           <div className="mb-5">
             <h2 className="text-3xl font-bold ">{project.name}</h2>
             <p className="py-2">{project.description}</p>

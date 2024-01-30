@@ -6,13 +6,10 @@ import clientQueries from "../queries/clientQueries";
 import { Calendar, DateRange, DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
+import { useAccess } from "../context/AccesContext";
 
 function AddProjectModal({ setShowProjectModal }) {
-  //variable should be projectInput => projectInput
-  // name: String!,
-  // description: String!,
-  // clientId: ID!,
-  // countDownHours: Int!,
+  const { owner } = useAccess();
   let countDownHours;
   //   const [clientId, setClientId] = useState("");
   const [showDate, setShowDate] = useState(false);
@@ -58,10 +55,13 @@ function AddProjectModal({ setShowProjectModal }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("we ust tried submitting");
+    if (!owner) {
+      return alert(
+        "You do not have access to this functionality since this is a private manager project. Click on the GET FULL ACCESS button to unlock feature "
+      );
+    }
     countDownHours = calculateEstimatedHours();
-    console.log("This is our project data....");
-    console.log(projectData);
+
     if (
       projectData.name === "" ||
       projectData.description === "" ||
@@ -72,13 +72,7 @@ function AddProjectModal({ setShowProjectModal }) {
     }
 
     const { name, description, clientId } = projectData;
-    // createProject({name, description, clientId, countDownHours});
-    console.log({
-      name,
-      description,
-      clientId,
-      countDownHours,
-    });
+
     createProject({
       variables: {
         projectInput: { name, description, clientId, countDownHours },

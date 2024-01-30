@@ -2,6 +2,7 @@ import { useState } from "react";
 import clientMutations from "../mutations/clientMutations";
 import clientQueries from "../queries/clientQueries";
 import { useMutation } from "@apollo/client";
+import { useAccess } from "../context/AccesContext";
 
 function AddClientModal({ setShowClientModal }) {
   const [clientInput, setClientInput] = useState({
@@ -9,7 +10,7 @@ function AddClientModal({ setShowClientModal }) {
     email: "",
     phone: "",
   });
-
+  const { owner } = useAccess();
   const [createClient, { data, loading, error }] = useMutation(
     clientMutations.CREATE_CLIENT,
     {
@@ -35,6 +36,11 @@ function AddClientModal({ setShowClientModal }) {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!owner) {
+      return alert(
+        "You do not have access to this functionality since this is a private manager project. Click on the GET FULL ACCESS button to unlock feature "
+      );
+    }
     if (
       clientInput.name === "" ||
       clientInput.email === "" ||
